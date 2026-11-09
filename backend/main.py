@@ -1,11 +1,11 @@
-﻿from fastapi import FastAPI
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 import joblib
 import pandas as pd
 import sqlite3
 from datetime import datetime, timezone
-
+from pathlib import Path
 app = FastAPI(
     title="Predictive Maintenance API",
     description="AI-based machine failure prediction",
@@ -20,8 +20,9 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-MODEL_PATH = "backend/models/predictive_maintenance_model.joblib"
-DATABASE_PATH = "backend/predictions.db"
+BASE_DIR = Path(__file__).resolve().parent
+MODEL_PATH = BASE_DIR / 'models' / 'predictive_maintenance_model.joblib'
+DATABASE_PATH = BASE_DIR / 'predictions.db'
 THRESHOLD = 0.40
 
 model = joblib.load(MODEL_PATH)
