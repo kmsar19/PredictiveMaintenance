@@ -1,4 +1,4 @@
-﻿const API_URL = "http://127.0.0.1:8000";
+const API_URL = "https://predictive-maintenance-api-fxbb.onrender.com";
 const THRESHOLD = 0.40;
 
 let predictionCount = 0;
@@ -17,10 +17,10 @@ async function checkAPI() {
     try {
         const response = await fetch(`${API_URL}/health`);
         if (!response.ok) throw new Error("Unavailable");
-        status.textContent = "● API Connected";
+        status.textContent = "? API Connected";
         status.style.color = "#15966b";
     } catch {
-        status.textContent = "● API Disconnected";
+        status.textContent = "? API Disconnected";
         status.style.color = "#dc4444";
     }
 }
@@ -101,7 +101,7 @@ function showResult(result) {
     heading.textContent = failure ? "Failure Risk" : "Normal Operation";
     conditionPanel.classList.toggle("failure", failure);
 
-    document.getElementById("conditionIcon").textContent = failure ? "!" : "✓";
+    document.getElementById("conditionIcon").textContent = failure ? "!" : "?";
     document.getElementById("confidenceText").textContent =
         `Failure probability: ${probability.toFixed(2)}%`;
 
@@ -201,7 +201,7 @@ document.getElementById("predictionForm").addEventListener("submit", async event
         alert("Prediction error: " + error.message);
     } finally {
         button.disabled = false;
-        button.textContent = "⚡ Predict";
+        button.textContent = "? Predict";
     }
 });
 
@@ -316,7 +316,7 @@ async function loadDatabaseStatistics() {
 
         const status = document.getElementById("cloudStatus");
         if (status) {
-            status.textContent = "● Database Connected";
+            status.textContent = "? Database Connected";
         }
 
     } catch (error) {
