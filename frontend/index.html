@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Predictive Maintenance System</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<aside class="sidebar">
+    <div class="brand">✳ Predictive Maintenance</div>
+    <nav>
+        <a class="active" href="#home">⌂ &nbsp; Home</a>
+        <a href="#monitoring">◉ &nbsp; Real-time Monitoring</a>
+        <a href="#predictions">▤ &nbsp; Predictions</a>
+        <a href="#performance">▥ &nbsp; Model Performance</a>
+        <a href="#data">▦ &nbsp; Data Management</a>
+        <a href="#settings">⚙ &nbsp; Settings</a>
+    </nav>
+    <div class="sidebar-bottom">AI Smart Manufacturing<br>Predictive Analytics</div>
+</aside>
+
+<div class="main">
+<header class="topbar">
+    <div>
+        <strong>Cloud-Assisted AI Framework</strong>
+        <small>Intelligent Predictive Maintenance</small>
+    </div>
+    <div class="top-info">
+        <span id="cloudStatus">● API Checking</span>
+        <span id="dateTime"></span>
+        <span>Admin ▾</span>
+    </div>
+</header>
+
+<main id="home">
+
+    <section class="page-heading">
+        <h2>Machine Health Prediction</h2>
+        <p>Enter machine parameters to predict the current health condition.</p>
+    </section>
+
+    <section class="main-grid">
+
+        <div class="panel input-panel">
+            <h3>Input Parameters</h3>
+
+            <form id="predictionForm">
+                <div class="inputs">
+
+                    <div>
+                        <label>Air Temperature (K)</label>
+                        <input id="airTemperature" type="number" step="any" value="298.1" required>
+                    </div>
+
+                    <div>
+                        <label>Process Temperature (K)</label>
+                        <input id="processTemperature" type="number" step="any" value="308.6" required>
+                    </div>
+
+                    <div>
+                        <label>Rotational Speed (rpm)</label>
+                        <input id="rotationalSpeed" type="number" step="any" value="1500" required>
+                    </div>
+
+                    <div>
+                        <label>Torque (Nm)</label>
+                        <input id="torque" type="number" step="any" value="40" required>
+                    </div>
+
+                    <div>
+                        <label>Tool Wear (min)</label>
+                        <input id="toolWear" type="number" step="any" value="100" required>
+                    </div>
+
+                    <div>
+                        <label>Machine Type</label>
+                        <select id="machineType">
+                            <option value="L">L - Low</option>
+                            <option value="M" selected>M - Medium</option>
+                            <option value="H">H - High</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="actions">
+                    <button type="submit" id="predictButton">⚡ Predict</button>
+                    <button type="reset" class="reset">↻ Reset</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="panel condition-panel">
+            <div class="condition-heading">
+                <div id="conditionIcon" class="condition-icon">✓</div>
+                <div>
+                    <small>Predicted Condition</small>
+                    <h2 id="conditionText">Awaiting Prediction</h2>
+                    <p id="confidenceText">Enter machine parameters</p>
+                </div>
+            </div>
+
+            <div class="result-details">
+                <p><span>Prediction</span><strong id="predictionValue">--</strong></p>
+                <p><span>Timestamp</span><strong id="predictionTime">--</strong></p>
+                <p><span>Model</span><strong>Random Forest</strong></p>
+                <p><span>Decision Threshold</span><strong>40%</strong></p>
+            </div>
+        </div>
+
+        <div class="panel health-panel">
+            <h3>Health Status</h3>
+            <div class="gauge" id="gauge">
+                <div class="gauge-inner">
+                    <strong id="healthValue">--%</strong>
+                    <span>No-failure probability</span>
+                </div>
+            </div>
+            <div class="legend">
+                <span><i class="green"></i> No-failure probability</span>
+                <span><i class="red"></i> Failure probability</span>
+            </div>
+            <p class="gauge-note">Probability estimates from the AI model; not a calibrated physical health score.</p>
+        </div>
+
+    </section>
+
+    <section class="lower-grid" id="monitoring">
+
+        <div class="panel chart-panel">
+            <h3>Sensor Readings (Last 24 Hours)</h3>
+            <p class="muted">Illustrative simulated trends — not live sensor measurements.</p>
+            <canvas id="sensorChart"></canvas>
+        </div>
+
+        <div class="panel history-panel" id="predictions">
+            <h3>Recent Predictions</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Machine</th>
+                            <th>Condition</th>
+                            <th>Probability</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyBody">
+                        <tr><td colspan="4">No predictions yet</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel performance-panel" id="performance">
+            <h3>Model Performance</h3>
+            <p class="muted">Independent test-set results</p>
+            <canvas id="performanceChart"></canvas>
+            <div class="metrics">
+                <span>Accuracy <b>96.6%</b></span>
+                <span>Precision <b>50.0%</b></span>
+                <span>Recall <b>88.2%</b></span>
+                <span>F1-score <b>63.8%</b></span>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="panel info-panel" id="data">
+        <h3>System Information</h3>
+        <p>Dataset: AI4I 2020 Predictive Maintenance</p>
+        <p>Algorithm: Random Forest Classifier</p>
+        <p>Input features: Machine type, air temperature, process temperature, rotational speed, torque and tool wear.</p>
+        <p>Prediction threshold: 0.40</p>
+    </section>
+
+    <section class="panel info-panel" id="settings">
+        <h3>Settings</h3>
+        <p>Backend API: http://127.0.0.1:8000</p>
+        <p>Prediction history currently lasts for this browser session only.</p>
+    </section>
+
+</main>
+
+<footer>Cloud-Assisted AI Framework for Intelligent Predictive Maintenance and Smart Manufacturing</footer>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
